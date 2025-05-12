@@ -40,7 +40,4 @@ setup(
     ],
     python_requires=">=3.10",
     include_package_data=True,
-    extras_require={
-        'stat': ['nn-stat']
-    }
 )
