@@ -66,18 +66,22 @@ def print_trainable_parameters(model, use_4bit=False):
     )
 
 
-def create_peft_config(modules):
+def create_peft_config(modules, lora_rank, lora_alpha, lora_dropout, task_type):
     """
     Create Parameter-Efficient Fine-Tuning config for your model
     :param modules: Names of the modules to apply Lora to
+    :param lora_rank: Rank of the LoRA
+    :param lora_alpha: Alpha of the LoRA
+    :param lora_dropout: Dropout of the LoRA
+    :param task_type: Type of the task (CASUAL_LM, SEQ_2_SEQ_LM, SEQ_CLS, TOKEN_CLS, QUESTION_ANS, FEATURE_EXTRACTION)
     """
     return LoraConfig(
-        r=16,  # dimension of the updated matrices
-        lora_alpha=64,  # parameter for scaling
+        r=lora_rank,  # dimension of the updated matrices
+        lora_alpha=lora_alpha,  # parameter for scaling
         target_modules=modules,
-        lora_dropout=0.1,  # dropout probability for layers
+        lora_dropout=lora_dropout,  # dropout probability for layers
         bias="none",
-        task_type="CAUSAL_LM",
+        task_type=task_type,
     )
 
 
@@ -86,11 +90,19 @@ class LoRATrainer(Tuner):
                  model: PreTrainedModel,
                  tokenizer: PreTrainedTokenizerBase,
                  training_args: TrainingArguments = default_training_args,
+                 lora_rank=16,
+                 lora_alpha=64,
+                 lora_dropout=0.1,
+                 task_type="CAUSAL_LM",
                  access_token=None
                  ):
         self.model = model
         self.tokenizer = tokenizer
         self.training_args = training_args
+        self.lora_rank = lora_rank
+        self.lora_alpha = lora_alpha
+        self.lora_dropout = lora_dropout
+        self.task_type = task_type
         self.access_token = access_token
 
     @override
@@ -101,7 +113,9 @@ class LoRATrainer(Tuner):
         self.model.gradient_checkpointing_enable()
         self.model = prepare_model_for_kbit_training(self.model)
         modules = find_all_linear_names(self.model)
-        peft_config = create_peft_config(modules)
+        peft_config = create_peft_config(
+            modules, self.lora_rank, self.lora_alpha, self.lora_alpha, self.task_type
+        )
         self.model = get_peft_model(self.model, peft_config)
         self.model.config.use_cache = False
 
