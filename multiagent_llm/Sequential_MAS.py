@@ -5,7 +5,7 @@ from .MultiAgentSystem import *
 
 class SequentialMAS(MultiAgentSystem):
     """
-    A sequential Multi-Agent System (Both Ring and Linear Structure)
+    A sequential Multi-agent System (Both Ring and Linear Structure)
     """
     def __init__(self, agents: dict[str, Agent], k=1):
         """

@@ -3,7 +3,7 @@ from overrides import override
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-from .Model_Loader_Base import *
+from .llm_loader_base import *
 
 
 class Classification_LLM_Loader(Model_Loader_Base):

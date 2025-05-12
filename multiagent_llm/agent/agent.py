@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Agent(ABC):
     """
-    A Common Interface for any Agent of the Multi-Agent System.
+    A Common Interface for any agent of the Multi-agent System.
     """
     @abstractmethod
     def act(self, state=None) -> str | list[dict] | None:

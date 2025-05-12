@@ -3,7 +3,7 @@ from llama_index.vector_stores.qdrant import QdrantVectorStore
 from overrides import override
 from qdrant_client import qdrant_client
 
-from .Agent import Agent
+from .agent import Agent
 
 
 class DRS_Agent(Agent):

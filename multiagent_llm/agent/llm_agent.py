@@ -2,7 +2,7 @@ import torch
 import transformers
 from overrides import override
 
-from .Agent import Agent
+from .agent import Agent
 from ..model_loaders import *
 
 

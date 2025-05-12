@@ -1,5 +1,8 @@
-transformers~=4.47.0
-torch~=2.6.0
+transformers~=4.50.0
+torch~=2.7.0
 overrides~=7.7.0
 llama-index-core~=0.12.2
 qdrant-client~=1.12.1
+bitsandbytes~=0.45.5
+peft~=0.15.2
+datasets~=3.6.0

@@ -1,3 +1,3 @@
-from .Casual_LLM_Loader import Casual_LLM_Loader
-from .Classification_LLM_Loader import Classification_LLM_Loader
-from .Model_Loader_Base import Model_Loader_Base
+from .casual_llm_loader import Casual_LLM_Loader
+from .classification_llm_loader import Classification_LLM_Loader
+from .llm_loader_base import Model_Loader_Base

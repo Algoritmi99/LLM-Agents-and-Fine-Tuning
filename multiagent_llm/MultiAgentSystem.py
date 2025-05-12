@@ -1,11 +1,11 @@
 from abc import ABC
 
-from Agent import Agent
+from agent import Agent
 
 
 class MultiAgentSystem(Agent, ABC):
     """
-    An Interface for Multi-Agent Systems.
+    An Interface for Multi-agent Systems.
     Must implement the method "act".
     """
     def __init__(self, agents: dict[str, Agent]):

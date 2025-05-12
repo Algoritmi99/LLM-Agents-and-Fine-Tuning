@@ -3,7 +3,7 @@ import os
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from overrides import override
 
-from .Model_Loader_Base import *
+from .llm_loader_base import *
 
 
 class Casual_LLM_Loader(Model_Loader_Base):
